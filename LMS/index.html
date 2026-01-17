@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics LMS for Kids - Home</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5px;
+        }
+        .intro {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            margin: 50px auto;
+            max-width: 1000px;
+        }
+        .intro h1 {
+            color: #4a148c;
+            margin-bottom: 20px;
+            font-size: 3em;
+        }
+        .intro p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #555;
+        }
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            margin: 50px auto;
+            max-width: 600px;
+        }
+        .login-container h2 {
+            color: #4a148c;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .login-form select, .login-form input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            text-align: center;
+        }
+        .login-form button {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .login-form button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="intro">
+            <h1>EDUINO ROBOTS</h1>
+            <p>LEARNING MANAGEMENT SYSTEM</p>
+        </div>
+        <div class="login-container">
+            <h2>Student Login</h2>
+            <form class="login-form" onsubmit="login(event)">
+                <select id="grade" required>
+                    <option value="">Select Grade</option>
+                    <option value="3">3rd Grade</option>
+                    <option value="4">4th Grade</option>
+                    <option value="5">5th Grade</option>
+                    <option value="6">6th Grade</option>
+                    <option value="7">7th Grade</option>
+                    <option value="8">8th Grade</option>
+                    <option value="9">9th Grade</option>
+                </select>
+                <input type="text" id="studentId" placeholder="Enter 6-digit Student ID" maxlength="6" required>
+                <button type="submit">Student Login</button>
+                <button type="submit" id="adminBtn">Admin Login</button>
+
+<script>
+  document.getElementById('adminBtn').addEventListener('click', function (e) {
+    e.preventDefault(); // stop form submit
+    window.location.href = 'admin.html';
+  });
+</script>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Generate Indian student data for each grade
+        const grade3Students = [
+            { id: "F", name: "Aarav Sharma" },
+            { id: "123002", name: "Priya Patel" },
+            { id: "123003", name: "Rohan Kumar" },
+            { id: "123004", name: "Ananya Singh" },
+            { id: "123005", name: "Vikram Gupta" },
+            { id: "123006", name: "Meera Joshi" },
+            { id: "123007", name: "Arjun Reddy" },
+            { id: "123008", name: "Kavya Iyer" },
+            { id: "123009", name: "Aditya Nair" },
+            { id: "123010", name: "Sneha Kapoor" },
+            { id: "123011", name: "Rahul Verma" },
+            { id: "123012", name: "Pooja Sharma" },
+            { id: "123013", name: "Karan Singh" },
+            { id: "123014", name: "Divya Patel" },
+            { id: "123015", name: "Amit Kumar" },
+            { id: "123016", name: "Neha Gupta" },
+            { id: "123017", name: "Sanjay Joshi" },
+            { id: "123018", name: "Kriti Reddy" },
+            { id: "123019", name: "Ravi Iyer" },
+            { id: "123020", name: "Anjali Nair" },
+            { id: "123021", name: "Vivek Kapoor" },
+            { id: "123022", name: "Shreya Verma" },
+            { id: "123023", name: "Rajesh Singh" },
+            { id: "123024", name: "Priyanka Sharma" },
+            { id: "123025", name: "Deepak Patel" },
+            { id: "123026", name: "Kiran Kumar" },
+            { id: "123027", name: "Sunita Gupta" },
+            { id: "123028", name: "Manoj Joshi" },
+            { id: "123029", name: "Rekha Reddy" },
+            { id: "123030", name: "Suresh Iyer" }
+        ];
+
+        const grade4Students = [
+            { id: "124001", name: "Arun Nair" },
+            { id: "124002", name: "Kavita Kapoor" },
+            { id: "124003", name: "Suresh Verma" },
+            { id: "124004", name: "Lakshmi Singh" },
+            { id: "124005", name: "Rajendra Sharma" },
+            { id: "124006", name: "Sunita Patel" },
+            { id: "124007", name: "Mohan Kumar" },
+            { id: "124008", name: "Geeta Gupta" },
+            { id: "124009", name: "Ramesh Joshi" },
+            { id: "124010", name: "Kamala Reddy" },
+            { id: "124011", name: "Venkatesh Iyer" },
+            { id: "124012", name: "Indira Nair" },
+            { id: "124013", name: "Prakash Kapoor" },
+            { id: "124014", name: "Sarita Verma" },
+            { id: "124015", name: "Ganesh Singh" },
+            { id: "124016", name: "Radha Sharma" },
+            { id: "124017", name: "Krishna Patel" },
+            { id: "124018", name: "Lalita Kumar" },
+            { id: "124019", name: "Shankar Gupta" },
+            { id: "124020", name: "Parvati Joshi" },
+            { id: "124021", name: "Rangan Reddy" },
+            { id: "124022", name: "Meenakshi Iyer" },
+            { id: "124023", name: "Narasimha Nair" },
+            { id: "124024", name: "Padma Kapoor" },
+            { id: "124025", name: "Vasudeva Verma" },
+            { id: "124026", name: "Saraswati Singh" },
+            { id: "124027", name: "Brahma Sharma" },
+            { id: "124028", name: "Vishnu Patel" },
+            { id: "124029", name: "Lakshmi Kumar" },
+            { id: "124030", name: "Shiva Gupta" }
+        ];
+
+        const grade5Students = [
+            { id: "125001", name: "Ravi Shankar" },
+            { id: "125002", name: "Maya Krishnan" },
+            { id: "125003", name: "Arun Subramanian" },
+            { id: "125004", name: "Latha Venkatesan" },
+            { id: "125005", name: "Srinivasan Iyer" },
+            { id: "125006", name: "Kamaladevi Nair" },
+            { id: "125007", name: "Rajagopal Kapoor" },
+            { id: "125008", name: "Vijayalakshmi Verma" },
+            { id: "125009", name: "Chandrashekhar Singh" },
+            { id: "125010", name: "Anandita Sharma" },
+            { id: "125011", name: "Balakrishnan Patel" },
+            { id: "125012", name: "Chitra Kumar" },
+            { id: "125013", name: "Dinesh Gupta" },
+            { id: "125014", name: "Eswari Joshi" },
+            { id: "125015", name: "Feroz Reddy" },
+            { id: "125016", name: "Gayathri Iyer" },
+            { id: "125017", name: "Harish Nair" },
+            { id: "125018", name: "Indumathi Kapoor" },
+            { id: "125019", name: "Jayaprakash Verma" },
+            { id: "125020", name: "Kamakshi Singh" },
+            { id: "125021", name: "Lakshminarayanan Sharma" },
+            { id: "125022", name: "Madhavi Patel" },
+            { id: "125023", name: "Nandakumar Kumar" },
+            { id: "125024", name: "Padmavati Gupta" },
+            { id: "125025", name: "Qamar Joshi" },
+            { id: "125026", name: "Radhakrishnan Reddy" },
+            { id: "125027", name: "Sarojini Iyer" },
+            { id: "125028", name: "Thirunavukkarasu Nair" },
+            { id: "125029", name: "Usha Kapoor" },
+            { id: "125030", name: "Venkataramanan Verma" }
+        ];
+
+        const grade6Students = [
+            { id: "126001", name: "Yogeshwaran Singh" },
+            { id: "126002", name: "Zeenat Sharma" },
+            { id: "126003", name: "Abdul Rahman Patel" },
+            { id: "126004", name: "Bhagya Lakshmi Kumar" },
+            { id: "126005", name: "Chandramouli Gupta" },
+            { id: "126006", name: "Devaki Joshi" },
+            { id: "126007", name: "Ezhilarasan Reddy" },
+            { id: "126008", name: "Fathima Iyer" },
+            { id: "126009", name: "Ganapathi Nair" },
+            { id: "126010", name: "Hemalatha Kapoor" },
+            { id: "126011", name: "Ilangovan Verma" },
+            { id: "126012", name: "Jayanthi Singh" },
+            { id: "126013", name: "Karthikeyan Sharma" },
+            { id: "126014", name: "Lalitha Patel" },
+            { id: "126015", name: "Mohanraj Kumar" },
+            { id: "126016", name: "Nandhini Gupta" },
+            { id: "126017", name: "Oomai Kizhangu Joshi" },
+            { id: "126018", name: "Ponnusamy Reddy" },
+            { id: "126019", name: "Quadir Iyer" },
+            { id: "126020", name: "Rajalakshmi Nair" },
+            { id: "126021", name: "Sathyanarayanan Kapoor" },
+            { id: "126022", name: "Thangam Verma" },
+            { id: "126023", name: "Udhayakumar Singh" },
+            { id: "126024", name: "Valli Sharma" },
+            { id: "126025", name: "Waseem Patel" },
+            { id: "126026", name: "Xavier Kumar" },
+            { id: "126027", name: "Yamini Gupta" },
+            { id: "126028", name: "Zaheer Joshi" },
+            { id: "126029", name: "Ambika Reddy" },
+            { id: "126030", name: "Balamurugan Iyer" }
+        ];
+
+        const grade7Students = [
+            { id: "127001", name: "Chandrika Nair" },
+            { id: "127002", name: "Dhananjayan Kapoor" },
+            { id: "127003", name: "Eswaran Verma" },
+            { id: "127004", name: "Fathima Beevi Singh" },
+            { id: "127005", name: "Ganesan Sharma" },
+            { id: "127006", name: "Hema Rani Patel" },
+            { id: "127007", name: "Indrajith Kumar" },
+            { id: "127008", name: "Jayachandran Gupta" },
+            { id: "127009", name: "Kalaivani Joshi" },
+            { id: "127010", name: "Lokanathan Reddy" },
+            { id: "127011", name: "Mahalakshmi Iyer" },
+            { id: "127012", name: "Natarajan Nair" },
+            { id: "127013", name: "Oviya Kapoor" },
+            { id: "127014", name: "Prabhu Verma" },
+            { id: "127015", name: "Qutubuddin Singh" },
+            { id: "127016", name: "Ramanathan Sharma" },
+            { id: "127017", name: "Sasikala Patel" },
+            { id: "127018", name: "Thirupathi Kumar" },
+            { id: "127019", name: "Umayal Gupta" },
+            { id: "127020", name: "Venkateswara Joshi" },
+            { id: "127021", name: "Waqar Ahmed Reddy" },
+            { id: "127022", name: "Xavier Joseph Iyer" },
+            { id: "127023", name: "Yamuna Nair" },
+            { id: "127024", name: "Zaheer Hussain Kapoor" },
+            { id: "127025", name: "Aishwarya Verma" },
+            { id: "127026", name: "Bharath Singh" },
+            { id: "127027", name: "Charumathi Sharma" },
+            { id: "127028", name: "Dharani Patel" },
+            { id: "127029", name: "Eshwar Kumar" },
+            { id: "127030", name: "Fathima Zohra Gupta" }
+        ];
+
+        const grade8Students = [
+            { id: "128001", name: "Gautami Joshi" },
+            { id: "128002", name: "Hariprasad Reddy" },
+            { id: "128003", name: "Indumathi Iyer" },
+            { id: "128004", name: "Jayapriya Nair" },
+            { id: "128005", name: "Kamalakannan Kapoor" },
+            { id: "128006", name: "Lalitha Kumari Verma" },
+            { id: "128007", name: "Mohanavel Singh" },
+            { id: "128008", name: "Nandhini Priya Sharma" },
+            { id: "128009", name: "Omsakthi Patel" },
+            { id: "128010", name: "Prabakaran Kumar" },
+            { id: "128011", name: "Quaid E Milleth Gupta" },
+            { id: "128012", name: "Rajarajeswari Joshi" },
+            { id: "128013", name: "Sathish Kumar Reddy" },
+            { id: "128014", name: "Thangapandian Iyer" },
+            { id: "128015", name: "Usharani Nair" },
+            { id: "128016", name: "Venkatraman Kapoor" },
+            { id: "128017", name: "Waseem Akram Verma" },
+            { id: "128018", name: "Xavier Benedict Singh" },
+            { id: "128019", name: "Yamuna Karthikeyan Sharma" },
+            { id: "128020", name: "Zaheer Abbas Patel" },
+            { id: "128021", name: "Abirami Kumar" },
+            { id: "128022", name: "Balasubramanian Gupta" },
+            { id: "128023", name: "Chandramukhi Joshi" },
+            { id: "128024", name: "Dhanasekar Reddy" },
+            { id: "128025", name: "Eswari Iyer" },
+            { id: "128026", name: "Fathima Rifaya Nair" },
+            { id: "128027", name: "Ganesh Kumar Kapoor" },
+            { id: "128028", name: "Hemalatha Verma" },
+            { id: "128029", name: "Ilangovan Singh" },
+            { id: "128256", name: "BASHA" },
+            { id: "128030", name: "Jayanthi Sharma" }
+        ];
+
+        const grade9Students = [
+            { id: "129001", name: "Karthikeyan Patel" },
+            { id: "129002", name: "Lalitha Priya Kumar" },
+            { id: "129003", name: "Mohanraj Gupta" },
+            { id: "129004", name: "Nandhini Joshi" },
+            { id: "129005", name: "Oomai Selvi Reddy" },
+            { id: "129006", name: "Ponnusamy Iyer" },
+            { id: "129007", name: "Quadir Hussain Nair" },
+            { id: "129008", name: "Rajalakshmi Kapoor" },
+            { id: "129009", name: "Sathyanarayanan Verma" },
+            { id: "129010", name: "Thangam Singh" },
+            { id: "129011", name: "Udhayakumar Sharma" },
+            { id: "129012", name: "Valli Patel" },
+            { id: "129013", name: "Waseem Kumar" },
+            { id: "129014", name: "Xavier Joseph Gupta" },
+            { id: "129015", name: "Yamini Joshi" },
+            { id: "129016", name: "Zaheer Reddy" },
+            { id: "129017", name: "Ambika Iyer" },
+            { id: "129018", name: "Balamurugan Nair" },
+            { id: "129019", name: "Chandrika Kapoor" },
+            { id: "129020", name: "Dhananjayan Verma" },
+            { id: "129021", name: "Eswaran Singh" },
+            { id: "129022", name: "Fathima Beevi Sharma" },
+            { id: "129023", name: "Ganesan Patel" },
+            { id: "129024", name: "Hema Rani Kumar" },
+            { id: "129025", name: "Indrajith Gupta" },
+            { id: "129026", name: "Jayachandran Joshi" },
+            { id: "129027", name: "Kalaivani Reddy" },
+            { id: "129028", name: "Lokanathan Iyer" },
+            { id: "129029", name: "Mahalakshmi Nair" },
+            { id: "129030", name: "Natarajan Kapoor" }
+        ];
+
+        const students = {
+            3: grade3Students,
+            4: grade4Students,
+            5: grade5Students,
+            6: grade6Students,
+            7: grade7Students,
+            8: grade8Students,
+            9: grade9Students
+        };
+
+        function login(event) {
+            event.preventDefault();
+            const grade = document.getElementById('grade').value;
+            const id = document.getElementById('studentId').value;
+            const student = students[grade]?.find(s => s.id === id);
+            if (student) {
+                // Store student info in localStorage
+                localStorage.setItem('loggedInStudent', JSON.stringify({
+                    id: student.id,
+                    name: student.name,
+                    grade: grade
+                }));
+                window.location.href = `grade${grade}.html`;
+            } else {
+                alert('Invalid Grade or Student ID');
+            }
+        }
+    </script>
+</body>
+</html>
